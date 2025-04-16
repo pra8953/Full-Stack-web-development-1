@@ -1,0 +1,9 @@
+<main class="container">
+  <h1>Hello User!!</h1>
+
+  <input [(ngModel)]="name" type="text" placeholder="अपना नाम लिखें" class="name-input">
+
+  <div *ngIf="name" class="greeting-box">
+    <h3>🙏 नमस्ते {{name}} जी</h3>
+  </div>
+</main>
