@@ -1,0 +1,6 @@
+
+<main class="main">
+  <button (click)="toggleMessage()" class="toggle-btn">{{display?"Hide Text":"Show Text"}}</button>
+  <h1 *ngIf="display" class="message">Hello! This is a toggle-able message.</h1>
+
+</main>
