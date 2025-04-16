@@ -1,0 +1,95 @@
+<div class="terminal-container">
+  <div class="terminal-header">
+    <div class="terminal-buttons">
+      <span class="close-btn"></span>
+      <span class="minimize-btn"></span>
+      <span class="expand-btn"></span>
+    </div>
+    <span class="terminal-title">user-registration.exe</span>
+  </div>
+  
+  <div class="terminal-body">
+    <div class="command-line">
+      <span class="prompt">C:\Users\Admin&gt;</span>
+      <span class="command">ng generate form</span>
+    </div>
+    
+    <div class="form-output">
+      <div class="output-line">Initializing Angular Form with Validation...</div>
+      <div class="output-line">✔ Form created successfully</div>
+      <div class="output-line">Starting registration process...</div>
+    </div>
+
+    <form #formRef="ngForm" (ngSubmit)="onSubmit(formRef)" class="terminal-form">
+      <!-- Name Field -->
+      <div class="form-group" [class.invalid]="name.invalid && name.touched">
+        <label class="input-prompt">Enter your full name:_</label>
+        <input 
+          type="text" 
+          name="name" 
+          [(ngModel)]="user.name" 
+          required 
+          #name="ngModel"
+          class="terminal-input">
+        <div class="error-message" *ngIf="name.invalid && name.touched">
+          <span class="error-prompt">ERROR:</span> Name is required
+        </div>
+      </div>
+
+      <!-- Email Field -->
+      <div class="form-group" [class.invalid]="email.invalid && email.touched">
+        <label class="input-prompt">Enter your email:_</label>
+        <input 
+          type="email" 
+          name="email" 
+          [(ngModel)]="user.email" 
+          required 
+          email 
+          #email="ngModel"
+          class="terminal-input">
+        <div class="error-message" *ngIf="email.invalid && email.touched">
+          <div *ngIf="email.errors?.['required']">
+            <span class="error-prompt">ERROR:</span> Email is required
+          </div>
+          <div *If="email.errors?.['email']">
+            <span class="error-prompt">ERROR:</span> Invalid email format
+          </div>
+        </div>
+      </div> 
+
+      <!-- Password Field -->
+      <div class="form-group" [class.invalid]="password.invalid && password.touched">
+        <label class="input-prompt">Enter password (min 6 chars):_</label>
+        <input 
+          type="password" 
+          name="password" 
+          [(ngModel)]="user.password" 
+          required 
+          minlength="6" 
+          #password="ngModel"
+          class="terminal-input">
+        <div class="error-message" *If="password.invalid && password.touched">
+          <div *If="password.errors?.['required']">
+            <span class="error-prompt">ERROR:</span> Password is required
+          </div>
+          <div *If="password.errors?.['minlength']">
+            <span class="error-prompt">ERROR:</span> Password too short (min 6 chars)
+          </div>
+        </div>
+      </div>
+
+      <div class="command-line">
+        <span class="prompt">C:\Users\Admin&gt;</span>
+        <button type="submit" class="terminal-btn" [disabled]="formRef.invalid">
+          submit_form
+        </button>
+      </div>
+    </form>
+
+    <div *If="submitted" class="success-message">
+      <div class="output-line">✔ Form submitted successfully!</div>
+      <div class="output-line">Processing data...</div>
+      <div class="output-line">User {{user.name}} registered!</div>
+    </div>
+  </div>
+</div>
