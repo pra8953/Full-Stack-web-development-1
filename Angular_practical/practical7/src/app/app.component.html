@@ -1,0 +1,19 @@
+<div class="todo-wrapper">
+  <h1 class="todo-heading">To-do List ✅</h1>
+
+  <div class="todo-input-area">
+    <input type="text" placeholder="Enter a task..." [(ngModel)]="task" />
+    <button (click)="addTask()">Add</button>
+  </div>
+
+  <ul class="todo-list" *ngIf="taskList.length > 0; else noTasks">
+    <li class="todo-item" *ngFor="let item of taskList; trackBy: trackById">
+      <span>{{ item.task }}</span>
+      <button (click)="del(item.id)">Delete</button>
+    </li>
+  </ul>
+
+  <ng-template #noTasks>
+    <p class="todo-empty">No tasks yet. Start your productivity!</p>
+  </ng-template>
+</div>
