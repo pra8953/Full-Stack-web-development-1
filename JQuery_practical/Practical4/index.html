@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AJAX with jQuery</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #userList {
+      margin-top: 20px;
+    }
+
+    .user {
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>AJAX Call to REST API</h2>
+  <button id="loadData">Load Users</button>
+
+  <div id="userList"></div>
+
+  <script>
+    $(document).ready(function () {
+      $('#loadData').click(function () {
+        $.ajax({
+          url: 'https://jsonplaceholder.typicode.com/users',
+          method: 'GET',
+          success: function (data) {
+            $('#userList').html(''); 
+            data.forEach(function (user) {
+              $('#userList').append(`
+                <div class="user">
+                  <strong>Name:</strong> ${user.name}<br>
+                  <strong>Email:</strong> ${user.email}<br>
+                  <strong>City:</strong> ${user.address.city}
+                </div>
+              `);
+            });
+          },
+          error: function () {
+            $('#userList').html('<p style="color:red;">Error fetching data</p>');
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

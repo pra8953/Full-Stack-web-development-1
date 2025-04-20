@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Practical 4</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    #slider {
+      width: 400px;
+      height: 250px;
+      position: relative;
+      margin: auto;
+      overflow: hidden;
+      border: 2px solid #333;
+      border-radius: 10px;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      display: none;
+      object-fit: cover;
+    }
+
+    .controls {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .controls button {
+      padding: 10px 15px;
+      font-size: 16px;
+      margin: 0 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2 style="text-align:center;">Image Slider (With Real Images)</h2>
+
+  <div id="slider">
+    <img class="slide" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=250&fit=crop" style="display: block;">
+    <img class="slide" src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=400&h=250&fit=crop">
+    <img class="slide" src="https://images.unsplash.com/photo-1506765515384-028b60a970df?w=400&h=250&fit=crop">
+  </div>
+
+  <div class="controls">
+    <button id="prev">Previous</button>
+    <button id="next">Next</button>
+  </div>
+
+  <script>
+    $(function() {
+      let slides = $(".slide");
+      let index = 0;
+      let total = slides.length;
+
+      function showSlide(i) {
+        slides.fadeOut(500);
+        slides.eq(i).fadeIn(500);
+      }
+
+      $("#next").click(function() {
+        index = (index + 1) % total;
+        showSlide(index);
+      });
+
+      $("#prev").click(function() {
+        index = (index - 1 + total) % total;
+        showSlide(index);
+      });
+
+      // Auto-play every 3 seconds
+      setInterval(function() {
+        $("#next").click();
+      }, 3000);
+    });
+  </script>
+
+</body>
+</html>

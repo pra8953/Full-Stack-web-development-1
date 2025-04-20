@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practical 1 JQuery</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h2 class="heading">Show / Hide / Toggle Box with Animation</h2>
+    
+    <div class="button-group">
+      <button id="showBtn" class="btn btn-primary">Show</button>
+      <button id="hideBtn" class="btn btn-danger">Hide</button>
+      <button id="toggleBtn" class="btn btn-success">Toggle</button>
+    </div>
+
+    <div id="myBox" class="box">
+      <span class="box-content">Hello! I'm a box</span>
+    </div>
+  </div>
+
+  <script >
+    $(document).ready(function() {
+  // Show with animation
+  $('#showBtn').click(function() {
+    $('#myBox').slideDown(500);
+  });
+
+  // Hide with animation
+  $('#hideBtn').click(function() {
+    $('#myBox').slideUp(500);
+  });
+
+  // Toggle with animation
+  $('#toggleBtn').click(function() {
+    $('#myBox').slideToggle(500, function() {
+      // Animation complete callback
+      console.log('Animation complete!');
+    });
+  });
+});
+  </script>
+</body>
+</html>

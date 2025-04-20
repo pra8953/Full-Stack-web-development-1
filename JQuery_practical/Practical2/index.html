@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Drag and Drop with jQuery UI</title>
+
+  <!-- jQuery & jQuery UI CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+  <style>
+    #draggable {
+      width: 120px;
+      height: 120px;
+      padding: 20px;
+      background-color: #3498db;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      line-height: 80px;
+      border-radius: 8px;
+      cursor: move;
+    }
+
+    #droppable {
+      width: 300px;
+      height: 150px;
+      margin-top: 30px;
+      background-color: #f0f0f0;
+      border: 2px dashed #aaa;
+      line-height: 150px;
+      text-align: center;
+      font-size: 18px;
+      color: #555;
+      border-radius: 10px;
+      transition: background-color 0.3s;
+    }
+
+    #droppable.active {
+      background-color: #d1f0d1;
+      border-color: #27ae60;
+      color: #27ae60;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Drag and Drop (jQuery UI)</h2>
+
+  <div id="draggable">Drag me</div>
+  <div id="droppable">Drop here</div>
+
+  <script>
+    $(function() {
+      // Make the box draggable
+      $("#draggable").draggable();
+
+      // Make the area droppable
+      $("#droppable").droppable({
+        over: function(event, ui) {
+          $(this).addClass("active");
+        },
+        out: function(event, ui) {
+          $(this).removeClass("active");
+        },
+        drop: function(event, ui) {
+          $(this)
+            .removeClass("active")
+            .html("<strong>Dropped!</strong>")
+            .css("background-color", "#d1f0d1");
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
